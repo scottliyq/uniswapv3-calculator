@@ -106,9 +106,11 @@ const EstimatedFees = () => {
   );
 
   if (state.isSwap) currentTick = -currentTick;
+  
 
   const L = calculateLiquidity(state.poolTicks || [], currentTick);
   const volume24H = state.volume24H;
+  console.log("volume24H: " + volume24H);
   const feeTier = state.pool?.feeTier || "";
 
   let fee = calculateFee(deltaL, L, volume24H, feeTier);

@@ -8,7 +8,7 @@ export const updateSubgraphEndpoint = (newEndpoint: string) => {
   subgraphEndpoint = newEndpoint;
 };
 
-const queryUniswap = async (query: string): Promise<any> => {
+export const queryUniswap = async (query: string): Promise<any> => {
   const { data } = await axios({
     url: subgraphEndpoint,
     method: "post",
@@ -20,7 +20,9 @@ const queryUniswap = async (query: string): Promise<any> => {
   return data.data;
 };
 
+//todo 获得pool 24小时交易量
 export const getVolumn24H = async (poolAddress: string): Promise<number> => {
+  console.log("pool address: " + poolAddress);
   const { poolDayDatas } = await queryUniswap(`{
     poolDayDatas(skip: 1, first:3, orderBy: date, orderDirection: desc, where:{pool: "${poolAddress}"}) {
       volumeUSD
@@ -35,6 +37,11 @@ export const getVolumn24H = async (poolAddress: string): Promise<number> => {
     data.reduce((result: number, curr: number) => result + curr, 0) /
     data.length
   );
+
+  // return (
+  //   data.reduce((result: number, curr: number) => result + curr, 0) /
+  //   data.length
+  // );
 };
 
 export interface Tick {
@@ -140,3 +147,6 @@ export const getPoolFromPair = async (
 
   return pools as Pool[];
 };
+
+
+
