@@ -114,7 +114,7 @@ async function main() {
           console.log(poolData["id"]);
           continue;
         }
-        console.log("store pool day data: " + poolData.id + " " + poolData.token0.symbol + " " + poolData.token1.symbol)
+        // console.log("store pool day data: " + poolData.id + " " + poolData.token0.symbol + " " + poolData.token1.symbol)
 
         // 保存数据库pool day data
         // await db
